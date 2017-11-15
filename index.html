@@ -5,14 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NEW PROJECT TEMPLATE</title>
 
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
     <link rel="stylesheet" href="css/min/main-min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
 
+    <!-- main container -->
+    <div class="container">
 
+      <div class="page-header text-center">
+        <h1>My Library</h1>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-8 books">
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>
+                Books
+                <div class="btn btn-primary glyphicon glyphicon-plus pull-right"></div>
+              </h3>
+            </div>
+
+            <!-- Table -->
+            <table id="bookTable" class="table table-striped table-responsive table-hover">
+              <tr></tr>
+              <tr class="book" data-id="some-id">
+                <td><img class="img-responsive" src="https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Silmarillion.png/220px-Silmarillion.png" alt="The Silmarillion"></td>
+                <td>The Silmarillion</td>
+              </tr>
+            </table>
+          </div> <!-- end panel -->
+
+        </div> <!-- end col-md-8 -->
+
+        <div class="col-md-4">
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>
+                Borrowers
+                <div class="btn btn-primary glyphicon glyphicon-plus pull-right"></div>
+              </h3>
+            </div>
+
+            <!-- Table -->
+            <table id="borrowerTable" class="table table-striped table-hover table-responsive">
+              <tr></tr>
+            </table>
+          </div>
+
+        </div> <!-- end col-md-4 -->
+
+      </div> <!-- end row -->
+
+    </div> <!-- end container -->
+
+    <section id="templates">
+      <table>
+        <tr class="book" data-id="some-id">
+          <td><img class="img-responsive bookImage" src="https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Silmarillion.png/220px-Silmarillion.png" alt="The Silmarillion"></td>
+          <td class="bookTitle">The Silmarillion</td>
+        </tr>
+
+        <tr class="borrower" data-id="some-id">
+          <td class="borrwerName">Name of Borrower</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Bootstrap: Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="scripts/min/requests-min.js" charset="utf-8"></script>
     <script src="scripts/min/main-min.js" charset="utf-8"></script>
+    <!-- <script src="scripts/min/test-min.js" charset="utf-8"></script> -->
   </body>
 </html>

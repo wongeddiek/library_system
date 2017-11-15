@@ -1,35 +1,33 @@
 class Requests {
 
   constructor(libraryID) {
-    this.serverURL = "https://floating-woodland-64068.herokuapp.com/"
+    this.serverURL = "https://floating-woodland-64068.herokuapp.com/";
     // this.serverURL = "http://localhost:3000"
-    this.libraryID = libraryID
+    this.libraryID = libraryID;
   }
 
+  // ajax call function for to be used for the below class methods
+  ajaxCall(actionStr, urlStr, dataObj = {}, createLib = false) {
+    return new Promise((resolve) => {
+      var req = $.ajax({
+        type: actionStr,
+        url: this.serverURL + urlStr,
+        data: dataObj
+      });
+      req.done((data) => {
+        if(createLib) this.libraryID = data.id;
+        resolve(data);
+      });
+    });
+  }
 
   /*
     POST -> /libraries
     Create a new library with the given name
   */
   createLibrary(name) {
-    var promise = new Promise((resolve) => {
-      var req = $.ajax({
-        type: 'POST',
-        url: `${this.serverURL}/libraries`,
-        data: {
-          library: {
-            name: name,
-          }
-        }
-      })
-      req.done((data) => {
-        this.libraryID = data.id
-        resolve(data)
-      })
-    })
-    return promise
+    return this.ajaxCall('POST', `libraries`, {library: {name: name,}}, true);
   }
-
 
   /*
   ==================================================================
@@ -38,70 +36,26 @@ class Requests {
   */
 
   getBorrowers() {
-    var promise = new Promise((resolve) => {
-      var req = $.ajax({
-        type: 'GET',
-        url: `${this.serverURL}/libraries/${this.libraryID}/borrowers`
-      })
-      req.done((data) => {
-        resolve(data)
-      })
-    })
-    return promise
+    return this.ajaxCall('GET', `libraries/${this.libraryID}/borrowers`);
   }
-
 
   /*
     POST -> /libraries/:library_id/borrowers
     Create a new borrower with the given arguments
   */
   createBorrower(borrower) {
-    var promise = new Promise((resolve) => {
-      var req = $.ajax({
-        type: 'POST',
-        url: `${this.serverURL}/libraries/${this.libraryID}/borrowers`,
-        data: {
-          borrower: borrower
-        }
-      })
-      req.done((data) => {
-        resolve(data)
-      })
-    })
-    return promise
+    return this.ajaxCall('POST', `libraries/${this.libraryID}/borrowers`,
+      {borrower: borrower});
   }
-
 
   updateBorrower(borrower) {
-    var promise = new Promise((resolve) => {
-      var req = $.ajax({
-        type: 'PUT',
-        url: `${this.serverURL}/libraries/${this.libraryID}/borrowers/${borrower.id}`,
-        data: {
-          borrower: borrower
-        }
-      })
-      req.done((data) => {
-        resolve(data)
-      })
-    })
-    return promise
+    return this.ajaxCall('PUT', `libraries/${this.libraryID}/borrowers/${borrower.id}`,
+      {borrower: borrower});
   }
-
 
   deleteBorrower(borrower) {
-    var promise = new Promise((resolve) => {
-      var req = $.ajax({
-        type: 'DELETE',
-        url: `${this.serverURL}/libraries/${this.libraryID}/borrowers/${borrower.id}`,
-      })
-      req.done((data) => {
-        resolve(data)
-      })
-    })
-    return promise
+    return this.ajaxCall('DELETE', `libraries/${this.libraryID}/borrowers/${borrower.id}`);
   }
-
 
   /*
   ==================================================================
@@ -110,16 +64,7 @@ class Requests {
   */
 
   getBooks() {
-    var promise = new Promise((resolve) => {
-      var req = $.ajax({
-        type: 'GET',
-        url: `${this.serverURL}/libraries/${this.libraryID}/books`
-      })
-      req.done((data) => {
-        resolve(data)
-      })
-    })
-    return promise
+    return this.ajaxCall('GET', `libraries/${this.libraryID}/books`);
   }
 
   /*
@@ -127,49 +72,17 @@ class Requests {
     Create a new book with the given arguments
   */
   createBook(book) {
-    var promise = new Promise((resolve) => {
-      var req = $.ajax({
-        type: 'POST',
-        url: `${this.serverURL}/libraries/${this.libraryID}/books`,
-        data: {
-          book: book
-        }
-      })
-      req.done((data) => {
-        resolve(data)
-      })
-    })
-    return promise
+    return this.ajaxCall('POST', `libraries/${this.libraryID}/books`,
+      {book: book});
   }
 
   updateBook(book) {
-    var promise = new Promise((resolve) => {
-      var req = $.ajax({
-        type: 'PUT',
-        url: `${this.serverURL}/libraries/${this.libraryID}/books/${book.id}`,
-        data: {
-          book: book
-        }
-      })
-      req.done((data) => {
-        resolve(data)
-      })
-    })
-    return promise
+    return this.ajaxCall('PUT',`libraries/${this.libraryID}/books/${book.id}`,
+      {book: book});
   }
 
-
   deleteBook(book) {
-    var promise = new Promise((resolve) => {
-      var req = $.ajax({
-        type: 'DELETE',
-        url: `${this.serverURL}/libraries/${this.libraryID}/books/${book.id}`,
-      })
-      req.done((data) => {
-        resolve(data)
-      })
-    })
-    return promise
+    return this.ajaxCall('DELETE',`libraries/${this.libraryID}/books/${book.id}`);
   }
 
 }

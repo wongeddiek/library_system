@@ -1,0 +1,19 @@
+$primary-color: cornflowerblue;
+
+* {
+  box-sizing: border-box;
+}
+
+.books {
+  .table {
+    .book {
+      img {
+        max-height: 100px;
+      }
+    }
+  }
+}
+
+#templates {
+  display: none;
+}
