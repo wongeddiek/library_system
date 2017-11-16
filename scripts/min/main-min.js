@@ -35,7 +35,7 @@ function addBookToPage(bookData) {
   });
 
   // append book object to the DOM bookTable
-  bookTable.append(book);
+  bookTable.prepend(book);
 }
 
 // function for adding borrowers to the webpage
@@ -48,7 +48,7 @@ function addBorrowerToPage(borrowerData) {
   // find the borrowerName class and set the borrower first and last name in DOM
   borrower.find('.borrowerName').text(`${borrowerData.firstname} ${borrowerData.lastname}`);
   // append borrower object to the DOM borrowerTable
-  borrowerTable.append(borrower);
+  borrowerTable.prepend(borrower);
 }
 
 
