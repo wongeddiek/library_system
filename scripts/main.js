@@ -41,6 +41,15 @@ function addBorrowertoPage(borrowerData) {
   borrowerTable.append(borrower);
 }
 
+// // function getNewBookData() {
+// //   var newBookData = {
+// //     title: $('#createBookForm').
+// //
+// //   }
+//
+//
+// }
+
 // var bookData = {id: 1, title: "Lord of the Rings", image_url: "https://images-na.ssl-images-amazon.com/images/I/51tW-UJVfHL._SX321_BO1,204,203,200_.jpg",}
 
 // get the books
@@ -57,6 +66,25 @@ getBorrowers.then(data => {
   data.forEach(borrowerData => {
     addBorrowertoPage(borrowerData);
   });
+});
+
+// add click handler for adding new books
+$('#createBook').on('click', e => {
+  e.preventDefault();
+  // create new bookData object
+  var bookData = {};
+  // serializeArray() form data, output = [{name:formname, value:formvalue},{}..]
+  //then map the data to the bookData object
+  $('#createBookForm').serializeArray().forEach(function(x){bookData[x.name] = x.value;});
+
+  // call the createbook ajax method, passing the bookData
+  var createBook = request.createBook(bookData);
+  // call the addBookToPage function to add the newly created book to page
+  createBook.then(data => {
+    addBookToPage(data);
+  });
+  // clear the form input fields
+  $('#createBookForm').find("input[type=text]").val("");
 });
 
 
