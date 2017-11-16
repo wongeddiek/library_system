@@ -30,13 +30,13 @@ function addBookToPage(bookData) {
 
 // function for adding borrowers to the webpage
 // The borrowerData arugment is passed in from the API
-function addBorrowertoPage(borrowerData) {
+function addBorrowerToPage(borrowerData) {
   // grab the <tr> template DOM object
   var borrower = borrowerTemplate.clone();
   // set borrowerData.id as the data-id
   borrower.attr('data-id', borrowerData.id);
-  // find the borrowerName class and set the Borrower Name in DOM
-  borrower.find('.borrwerName').text(`${borrowerData.firstname} ${borrowerData.lastname}`);
+  // find the borrowerName class and set the borrower first and last name in DOM
+  borrower.find('.borrowerName').text(`${borrowerData.firstname} ${borrowerData.lastname}`);
   // append borrower object to the DOM borrowerTable
   borrowerTable.append(borrower);
 }
@@ -64,7 +64,7 @@ getBooks.then(data => {
 var getBorrowers = request.getBorrowers();
 getBorrowers.then(data => {
   data.forEach(borrowerData => {
-    addBorrowertoPage(borrowerData);
+    addBorrowerToPage(borrowerData);
   });
 });
 
@@ -87,6 +87,24 @@ $('#createBook').on('click', e => {
   $('#createBookForm').find("input[type=text]").val("");
 });
 
+// add click handler for adding new borrowers
+$('#createBorrower').on('click', e => {
+  e.preventDefault();
+  // create new borrowerData object
+  var borrowerData = {};
+  // serializeArray() form data, output = [{name:formname, value:formvalue},{}..]
+  //then map the data to the bookBorrower object
+  $('#createBorrowerForm').serializeArray().forEach(function(x){borrowerData[x.name] = x.value;});
+
+  // call the createborrower ajax method, passing the borrowerData
+  var createBorrower = request.createBorrower(borrowerData);
+  // call the addBorrowerToPage function to add the newly created borrower to page
+  createBorrower.then(data => {
+    addBorrowerToPage(data);
+  });
+  // clear the form input fields
+  $('#createBorrowerForm').find("input[type=text]").val("");
+});
 
 // <tr class="borrower" data-id="some-id">
 //   <td class="borrwerName">Name of Borrower</td>
