@@ -45,32 +45,55 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="bookModalLabel">Add a New Book</h4>
+                  <h4 class="modal-title" id="bookModalLabel">Create a New Book</h4>
                 </div>
                 <div class="modal-body">
                   <form id="createBookForm" action="index.html" method="post">
-                      <div class="form-group">
+                      <div class="form-group input-group">
+                        <span class="input-group-addon"><div class="glyphicon glyphicon-book"></div></span>
                         <input class="form-control" type="text" name="title" placeholder="Book Name">
                       </div>
                       <div class="form-group">
-                        <input class="form-control" type="text" name="description" placeholder="Book Description">
+                        <textarea class="form-control" rows="6" name="description" placeholder="Book Description"></textarea>
                       </div>
-                      <div class="form-group">
-                        <input class="form-control" type="text" name="image_url" placeholder="Book Image URL">
+                      <div class="form-group input-group">
+                        <span class="input-group-addon"><div class="glyphicon glyphicon-picture"></div></span>
+                        <input id="imageInput" class="form-control" type="text" name="image_url" placeholder="Book Image URL">
                       </div>
                       <!-- <div class="form-group">
                         <button id="createBook" class="btn btn-primary" type="submit" name="button">Add Book</button>
                       </div> -->
                   </form>
+                  <p id="imagePreviewText"></p>
+                  <img id="imagePreview" src="" alt="">
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button id="createBook" type="button" class="btn btn-primary" data-dismiss="modal">Add Book</button>
+                  <button id="createBook" type="button" class="btn btn-primary">Create Book</button>
                 </div>
               </div>
             </div>
           </div> <!-- end Create Book Modal -->
 
+          <!-- Book detail modal -->
+          <div class="modal fade" id="bookDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-id="">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="bookDetailModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                  <img id="bookDetailModalImage" class="img-responsive" src="" alt="">
+                  <p id="bookDetailModalDescription"></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button id="deleteBook" type="button" class="btn btn-danger">Delete Book</button>
+                </div>
+              </div>
+            </div>
+          </div> <!-- end Create Book Modal -->
         </div> <!-- end col-md-8 -->
 
         <div class="col-md-4">
@@ -109,7 +132,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button id="createBorrower" type="button" class="btn btn-primary" data-dismiss="modal">Add Book</button>
+                  <button id="createBorrower" type="button" class="btn btn-primary">Create Borrower</button>
                 </div>
               </div>
             </div>
@@ -124,7 +147,7 @@
     <!-- templates for adding dynamic elements in html using jquery -->
     <section id="templates" class="hidden">
       <table>
-        <tr class="book" data-id="some-id">
+        <tr class="book" data-id="some-id" data-toggle="modal" data-target="#bookDetailModal">
           <td><img class="img-responsive bookImage" src="" alt=""></td>
           <td class="bookTitle"></td>
         </tr>

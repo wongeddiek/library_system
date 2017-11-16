@@ -3,3 +3,10 @@
 
 .books .table .book img {
   max-height: 100px; }
+
+#imagePreview {
+  max-height: 200px;
+  color: red; }
+
+#bookDetailModalImage {
+  max-height: 300px; }

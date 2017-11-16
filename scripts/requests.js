@@ -67,6 +67,10 @@ class Requests {
     return this.ajaxCall('GET', `libraries/${this.libraryID}/books`);
   }
 
+  getBook(book) {
+    return this.ajaxCall('GET', `libraries/${this.libraryID}/books/${book.id}`);
+  }
+
   /*
     POST -> /libraries/:library_id/books
     Create a new book with the given arguments
